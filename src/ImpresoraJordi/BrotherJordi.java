@@ -3,6 +3,10 @@ package ImpresoraJordi;
 import Exceptions.CisaExceptions;
 import Functions.SendEmail;
 import java.io.*;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 
 /**
@@ -10,8 +14,15 @@ import java.util.*;
  * @author linusdufol
  */
 public class BrotherJordi {
- public static int per, per2, per3, per4;
+ public static int per = 0, per2, per3, per4;
     public void BrotherJordi() throws FileNotFoundException, IOException, CisaExceptions {
+        
+        String source1 = "http://192.168.28.233/etc/view_config.html"; //Brother HL-L2340D
+        URL url1 = new URL(source1);
+        String targetDirectory1 = "src";
+        String fileName = source1.substring(source1.lastIndexOf('/') + 1, source1.length()); /**************/
+        Path targetPath = new File(targetDirectory1 + File.separator + fileName).toPath();  /*status.html*/
+        Files.copy(url1.openStream(), targetPath, StandardCopyOption.REPLACE_EXISTING);
         
         List<String> lines3 = new ArrayList<>(); //Array Brother Jordi
         List<Character> percCian = new ArrayList<>();
@@ -19,33 +30,36 @@ public class BrotherJordi {
         List<Character> percGroc = new ArrayList<>();
         List<Character> percNegre = new ArrayList<>();
         try{
-        File file = new File("/Users/linusdufol/Documents/workspace/CisaSwing/src/Files/file.html"); //Declarem l'arxiu on ho posarem tot
-        Scanner info = new Scanner(new File("/Users/linusdufol/Documents/workspace/CisaSwing/src/Files/info.html")); //Llegim l'arxiu status.html
-        BufferedWriter bw = new BufferedWriter(new FileWriter(file, true)); //Declarem BW per file.html
+        Scanner info = new Scanner(new File("src/view_config.html")); //Llegim l'arxiu status.html
+
         while (info.hasNext()) {
             lines3.add(info.nextLine()); //A l'array 'lines' afegim una linia a cada posicio de status.html
         }
 
         for (int i = 6; percCian.size() <= 9;) {
-            percCian.add(lines3.get(144).charAt(i));
-            percMagenta.add(lines3.get(158).charAt(i));
-            percGroc.add(lines3.get(172).charAt(i));
-            percNegre.add(lines3.get(186).charAt(i));
+            percCian.add(lines3.get(141).charAt(i));
+            percMagenta.add(lines3.get(155).charAt(i));
+            percGroc.add(lines3.get(169).charAt(i));
+            percNegre.add(lines3.get(183).charAt(i));
             i += 8;
         }
-        
+            System.out.println(percCian);
+            System.out.println(percMagenta);
+            System.out.println(percGroc);
+            System.out.println(percNegre);
         for (int i = 0; i < percCian.size(); i++) {
             if (percCian.get(i) == '0') {
-                per =+ 1 * 10;
+                per += 1 * 10;
+                System.out.println(per);
             }
             if (percMagenta.get(i) == '0') {
-                per2 = + 1 * 10;
+                per2 += 1 * 10;
             }
             if (percGroc.get(i) == '0') {
-                per3 =+ 1 * 10;
+                per3 += 1 * 10;
             }
             if (percNegre.get(i) == '0') {
-                per4 =+ 1 * 10;
+                per4 += 1 * 10;
             }
         }
         ArrayList<Integer> percCol = new ArrayList<>();
@@ -59,6 +73,7 @@ public class BrotherJordi {
         percCol.add(per2);
         percCol.add(per3);
         percCol.add(per4);
+        
         for (int i = 0; i < percCol.size(); i++) {
             if (percCol.get(i) <= 7) {
                 System.out.println("La impresora s'ha quedat sense color " + colors.get(i) + ", " + "percentatge = " + percCol.get(i) + "%, " + "enviant mail ...");

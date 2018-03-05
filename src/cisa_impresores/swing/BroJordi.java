@@ -175,6 +175,10 @@ private static void brojordi(BrotherJordi brojordi) throws IOException {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TornaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TornaActionPerformed
+        per = 0;
+        per2 = 0;
+        per3 = 0;
+        per4 = 0;
         dispose();
     }//GEN-LAST:event_TornaActionPerformed
 

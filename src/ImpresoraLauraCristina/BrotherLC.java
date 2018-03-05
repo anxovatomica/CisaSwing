@@ -19,13 +19,13 @@ public class BrotherLC {
         URL url1 = new URL(source1);
         try{
             
-        String targetDirectory1 = "/Users/linusdufol/Documents/workspace/CisaSwing/src/Files";
+        String targetDirectory1 = "src";
         String fileName = source1.substring(source1.lastIndexOf('/') + 1, source1.length()); /**************/
         Path targetPath = new File(targetDirectory1 + File.separator + fileName).toPath();  /*status.html*/
         Files.copy(url1.openStream(), targetPath, StandardCopyOption.REPLACE_EXISTING);    /**************/
         
         
-        Scanner Brother = new Scanner(new File("/Users/linusdufol/Documents/workspace/CisaSwing/src/Files/status.html")); //Llegim l'arxiu status.html
+        Scanner Brother = new Scanner(new File("src/status.html")); //Llegim l'arxiu status.html
         
         
         List<String> lines = new ArrayList<>(); //Array Brother HL-L2340D series

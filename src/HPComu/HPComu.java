@@ -31,16 +31,17 @@ public class HPComu {
         String source2 = "https://192.168.28.8/"; //HP LaserJet 500
         URL url2 = new URL(source2);
 
-        String targetDirectory2 = "/Users/linusdufol/Documents/workspace/CISA_Impresores/src/Files/index.html";
+        String targetDirectory2 = "../index.html";
 
         DisableSSLVerification disableSsl = new DisableSSLVerification();
         DisableSsl(disableSsl); //Desavilito la verificacio ssl
+        
 try {
         String fileName2 = source2.substring(source2.lastIndexOf('/') + 1, source2.length());/****************/
         Path targetPath2 = new File(targetDirectory2 + File.separator + fileName2).toPath();/***index.html***/
         Files.copy(url2.openStream(), targetPath2, StandardCopyOption.REPLACE_EXISTING);   /****************/
         
-        Scanner HPComun = new Scanner(new File("/Users/linusdufol/Documents/workspace/CISA_Impresores/src/Files/index.html"));// Llegim l'arxiu index.html
+        Scanner HPComun = new Scanner(new File("../index.html"));// Llegim l'arxiu index.html
 
         
 
@@ -87,7 +88,6 @@ try {
                     EnviarMail(sendmail, subject, messages);
                 } else {
                     System.out.println("Color " + colors.get(i) + " ... OK");
-                    
                 }
             }
         } catch (IOException | NumberFormatException e) {
